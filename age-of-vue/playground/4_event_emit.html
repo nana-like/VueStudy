@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <app-btn v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트 메서드 이름"></app-btn> -->
+      <p>{{num}}</p>
+      <app-btn v-on:pass="logText"></app-btn>
+      <app-content v-on:increase="increaseNum"></app-content>
+    </div>
+    <script>
+      var appBtn = {
+        template: '<button v-on:click="passEvent">Log</button>',
+        methods: {
+          passEvent: function () {
+            this.$emit('pass');
+          },
+        },
+      };
+      var appContent = {
+        template: '<button v-on:click="addNumber">Add</button>',
+        methods: {
+          addNumber: function () {
+            this.$emit('increase');
+          },
+        },
+      };
+      var vm = new Vue({
+        el: '#app',
+        components: {
+          'app-btn': appBtn,
+          'app-content': appContent,
+        },
+        methods: {
+          logText: function () {
+            console.log(this.num);
+          },
+          increaseNum: function () {
+            this.num++;
+          },
+        },
+        data: {
+          num: 10,
+        },
+      });
+    </script>
+  </body>
+</html>
