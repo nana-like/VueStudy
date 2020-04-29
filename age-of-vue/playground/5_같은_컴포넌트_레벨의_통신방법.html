@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <컴포넌트 v-bind:프롭스 속성이름="상위 컴포넌트 데이터 이름"></컴포넌트> -->
+      <app-header v-bind:propsdata="num"></app-header>
+      <app-content v-on:pass="deliverNum"></app-content>
+    </div>
+    <script>
+      /*
+      
+      app-content에서 app-header로 바로 데이터를 넘겨줄 수 없다. 막혀있기 때문!
+      그래서 촌수를 따라 올라가듯이 상위 컴포넌트에 데이터를 넘기고(=event)
+      상위 컴포넌트로부터 데이터를 받아야 한다(=props)
+
+      */
+      var appHeader = {
+        template: '<div>Header <p>{{ propsdata }}</p></div>',
+        props: ['propsdata'],
+      };
+      var appContent = {
+        template:
+          '<div>Content <button v-on:click="passNum">Pass</button> </div>',
+        methods: {
+          passNum: function () {
+            this.$emit('pass', 10);
+          },
+        },
+      };
+      var vm = new Vue({
+        el: '#app',
+        components: {
+          'app-header': appHeader,
+          'app-content': appContent,
+        },
+        data: {
+          num: 0,
+        },
+        methods: {
+          deliverNum: function (value) {
+            this.num += value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
