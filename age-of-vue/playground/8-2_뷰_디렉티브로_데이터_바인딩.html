@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .active {
+      color: crimson;
+    }
+  </style>
+
+  <!-- * Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if="loading">로그인하는 중</div>
+    <div v-else>로그인 완료!</div>
+    <div v-show="loading">loading이 false일 때 저는 display:none이 될 거에요...</div>
+  </div>
+  <hr />
+  <div id="app-2">
+    <input type="text" v-model="msg">
+    <p>메시지: {{ msg }}</p>
+  </div>
+  <script>
+
+    var appMsg = {
+      template: '<p>11</p>'
+    }
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        loading: true
+      },
+      components: {
+        'app-msg': appMsg
+      }
+    })
+
+    var vm2 = new Vue({
+      el: '#app-2',
+      data: {
+        msg: 'hello'
+      }
+    })
+
+  </script>
+</body>
+
+</html>
