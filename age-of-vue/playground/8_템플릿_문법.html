@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .active {
+      color: crimson;
+    }
+  </style>
+
+  <!-- * Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p v-bind:id="uuid">숫자: {{ num }}</p>
+    <p v-bind:class="name">숫자*2: {{ doubleNum }}</p>
+    <app-btn v-on:up="upNum"></app-btn>
+  </div>
+  <script>
+
+    /*
+
+      - 데이터 바인딩: 콧수염 괄호 {{ }}
+      - 디렉티브: v-로 시작. 화면 조작에 자주 사용되는 방식을 모아 디렉티브 형태로 제공한다.
+
+    */
+
+    var appBtn = {
+      template: '<button v-on:click="addNum">숫자 1 올리기</button>',
+      methods: {
+        addNum: function () {
+          this.$emit('up')
+        }
+      }
+    }
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        num: 10,
+        uuid: 'abc1234',
+        name: 'active'
+      },
+      computed: {
+        doubleNum: function () {
+          return this.num * 2;
+        }
+      },
+      components: {
+        'app-btn': appBtn
+      },
+      methods: {
+        upNum: function () {
+          this.num++;
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
