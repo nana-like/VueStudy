@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .active {
+      color: crimson;
+    }
+  </style>
+
+  <!-- * Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ num }}</p>
+    <button v-on:click="addNum">Increase</button>
+  </div>
+  <script>
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        num: 10,
+      },
+      watch: {
+        num: function () {
+          console.log("num 바뀜")
+        }
+      },
+      methods: {
+        addNum: function () {
+          this.num++;
+        },
+      }
+    })
+  </script>
+</body>
+
+</html>

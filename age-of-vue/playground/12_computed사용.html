@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .warning {
+      color: crimson;
+    }
+  </style>
+
+  <!-- * Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1) 템플릿 자체에 조건 적기 -->
+    <!-- { 클래스네임 : 조건 } -->
+    <!-- <p v-bind:class="{ warning: isError }">Hey!</p> -->
+
+    <!-- 2) computed 활용하기 -->
+    <p v-bind:class="errorTextColor">Hey!</p>
+  </div>
+  <script>
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        isError: true
+      },
+      computed: {
+        errorTextColor: function () {
+          return this.isError ? 'warning' : null;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
