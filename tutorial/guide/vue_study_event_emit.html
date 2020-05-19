@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ num }}</p>
+    <up-button v-on:increase="increaseNum"></up-button>
+    <down-button v-on:decrease="decreaseNum"></down-button>
+  </div>
+  <script>
+    var upButton = {
+      template: '<button v-on:click="upNumber">Up</button>',
+      methods: {
+        upNumber: function () {
+          this.$emit('increase');
+        }
+      }
+    }
+
+    var downButton = {
+      template: '<button v-on:click="downNumber">Down</button>',
+      methods: {
+        downNumber: function () {
+          this.$emit('decrease');
+        }
+      }
+    }
+
+
+    new Vue({
+      el: '#app',
+      data: {
+        num: 10
+      },
+      components: {
+        'up-button': upButton,
+        'down-button': downButton
+      },
+      methods: {
+        increaseNum: function () {
+          this.num++;
+        },
+        decreaseNum: function () {
+          this.num--;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
