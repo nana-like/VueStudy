@@ -17,50 +17,23 @@
 
 <body>
   <div id="app">
-    <p v-bind:id="uuid">숫자: {{ num }}</p>
-    <p v-bind:class="name">숫자*2: {{ doubleNum }}</p>
-    <app-btn v-on:up="upNum"></app-btn>
+    <div class="message">
+      <div v-if="loading">
+        로딩...
+      </div>
+      <div v-else>
+        로그인 완료!
+      </div>
+    </div>
+    <p>Hello!</p>
   </div>
   <script>
-
-    /*
-
-      - 데이터 바인딩: 콧수염 괄호 {{ }}
-      - 디렉티브: v-로 시작. 화면 조작에 자주 사용되는 방식을 모아 디렉티브 형태로 제공한다.
-
-    */
-
-    var appBtn = {
-      template: '<button v-on:click="addNum">숫자 1 올리기</button>',
-      methods: {
-        addNum: function () {
-          this.$emit('up')
-        }
-      }
-    }
-
     var vm = new Vue({
       el: '#app',
       data: {
-        num: 10,
-        uuid: 'abc1234',
-        name: 'active'
+        loading: true
       },
-      computed: {
-        doubleNum: function () {
-          return this.num * 2;
-        }
-      },
-      components: {
-        'app-btn': appBtn
-      },
-      methods: {
-        upNum: function () {
-          this.num++;
-        }
-      }
     })
-
   </script>
 </body>
 

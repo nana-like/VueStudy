@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 제이쿼리 ajax 사용 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function getData(callbackFunc) {
+      $.get('https://jsonplaceholder.typicode.com/users/', function (response) {
+        callbackFunc(response); // 서버에서 받은 데이터 response를 callbackFunc() 함수에 넘겨줌
+      });
+    }
+
+    getData(function (tableData) {
+      console.log(tableData); // $.get()의 response 값이 tableData에 전달됨
+    });
+  </script>
+
+  <!-- 프로미스 사용 -->
+  <script>
+    function getData() {
+      return new Promise(function (resolve, reject) {
+        reject(new Error("Request is failed"));
+      });
+    }
+
+    // reject()의 결과 값 Error를 err에 받음
+    getData().then().catch(function (err) {
+      console.error(err); // Error: Request is failed
+    });
+  </script>
+
+</body>
+
+</html>

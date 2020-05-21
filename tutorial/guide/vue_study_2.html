@@ -10,38 +10,40 @@
 
 <body>
   <div id="app">
-    <app-header v-bind:propsdata="num"></app-header>
-    <app-content v-on:pass="deliverNum"></app-content>
+    <app-header v-bind:propsdata="number"></app-header>
+    <app-content v-on:pass="addNum"></app-content>
   </div>
   <script>
+
     var appHeader = {
-      template: '<div>Header <p>{{ propsdata }}</p></div>',
       props: ['propsdata'],
-    };
+      template: '<div>Header <span>{{propsdata}}</span></div>'
+    }
+
     var appContent = {
-      template:
-        '<div>Content <button v-on:click="passNum">Pass</button> </div>',
+      template: '<div>Content <button v-on:click="passNumber">pass</button></div>',
       methods: {
-        passNum: function () {
+        passNumber: function () {
           this.$emit('pass', 10);
         },
-      },
-    };
-    var vm = new Vue({
+      }
+    }
+
+    new Vue({
       el: '#app',
+      data: {
+        number: 0
+      },
       components: {
         'app-header': appHeader,
-        'app-content': appContent,
-      },
-      data: {
-        num: 0,
+        'app-content': appContent
       },
       methods: {
-        deliverNum: function (value) {
-          this.num += value;
-        },
-      },
-    });
+        addNum: function (value) {
+          this.number += value;
+        }
+      }
+    })
   </script>
 </body>
 
