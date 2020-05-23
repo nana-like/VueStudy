@@ -5,30 +5,42 @@
       Add
       <i class="fas fa-plus-circle"></i>
     </button>
+    <Modal v-if="showModal" @close="showModal=false">
+      <h3 slot="header">Oops!</h3>
+      <p slot="body">내용을 입력하세요.</p>
+      <p slot="footer">
+        <small>copyright 2020 nana</small>
+      </p>
+    </Modal>
   </div>
 </template>
 
 <script>
+import Modal from "./common/Modal.vue";
+
 export default {
   data: function() {
     return {
-      newTodoItem: ""
+      newTodoItem: "",
+      showModal: false
     };
   },
   methods: {
     addTodo: function() {
       if (this.newTodoItem != "") {
-        var obj = {
-          completed: false,
-          item: this.newTodoItem
-        };
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        this.showModal = false;
+        this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput: function() {
       this.newTodoItem = "";
     }
+  },
+  components: {
+    Modal: Modal
   }
 };
 </script>
