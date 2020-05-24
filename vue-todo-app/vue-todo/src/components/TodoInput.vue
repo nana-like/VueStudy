@@ -26,7 +26,7 @@ export default {
     };
   },
   methods: {
-    addTodo: function() {
+    addTodo() {
       if (this.newTodoItem != "") {
         this.showModal = false;
         this.$emit("addTodoItem", this.newTodoItem);
@@ -35,12 +35,12 @@ export default {
         this.showModal = !this.showModal;
       }
     },
-    clearInput: function() {
+    clearInput() {
       this.newTodoItem = "";
     }
   },
   components: {
-    Modal: Modal
+    Modal
   }
 };
 </script>

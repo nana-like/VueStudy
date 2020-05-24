@@ -1,0 +1,63 @@
+# MEMO
+
+## Enhanced Object Literals (향상된 객체 리터럴)
+
+- ES6에서는 객체의 속성을 메서드로 사용할 때 `function` 예약어를 생략할 수 있다.
+  
+```javascript
+  let me = {
+    name: 'nana',
+    sayHello: function(){
+      console.log('Hello');
+    },
+    sayBye(){
+      console.log('Bye');
+    }
+  }
+```
+
+- ES6에서는 객체의 속성과 값의 이름이 동일하면 축약할 수 있다.
+
+```javascript
+  let name = 'nana';
+  let object = {
+    // name : name
+    name
+  }
+```
+
+## Modules
+
+- ES6부터는 자바스크립트 모듈 로더 라이브러리(AMD, Commons JS) 기능을 자체 지원한다.
+- 호출 전에는 코드가 실행/동작되지 않는다.
+
+```javascript
+  // libs/math.js
+  export function sum(x,y){
+    return x+y;
+  }
+  export const pi = 3.141593;
+
+  // main.js
+  import { sum } from 'libs/math.js';
+  sum (1,2);
+```
+
+- Vue.js에서 사용하는 `default` export는 한 파일에서 하나만 export 할 수 있다.
+
+```javascript
+  // util.js
+  export default function(x){
+    return console.log(x);
+  }  
+
+  // main.js
+  import util from 'util.js';
+  console.log(util);
+  util("hi");
+
+  // app.js
+  import log from 'util.js';
+  console.log(log);
+  log("hi");
+```
