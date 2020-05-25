@@ -68,6 +68,7 @@
 - 복잡한 애플리케이션의 컴포넌트들을 효율적으로 관리하기 위한 상태 관리 패턴이자 라이브러리
 - React의 Flux 패턴에서 기인함
 - MVC 패턴의 구조적 오류를 해결할 수 있고, 여러 개의 컴포넌트에서 같은 데이터를 업데이트할 때 동기화 문제를 해결할 수 있다.
+- `npm install vuex --save`로 설치
 
 ### Flux
 - MVC 패턴의 복잡한 데이터 흐름 문제를 해결하는 개발 패턴
@@ -87,6 +88,18 @@ Action ---> Dispatcher ---> Model ---> View
 4. View (사용자에게 보여지는 화면)
 ```
 
+### Vuex 컨셉
+1. State: 컴포넌트 간에 공유하는 데이터 `data()`
+2. View: 데이터를 표시하는 화면 `template`
+3. Action: 사용자의 입력에 따라 데이터를 변경하는 `methods`
+
+View -> Actions -> State -> View -> Actions ...
+
+
+
+**state를 직접 변경하지 않고 mutations로 변경하는 이유**
+- 여러 개의 컴포넌트에서 state 값을 변경할 때, 어느 컴포넌트에서 해당 state를 변경했는지 추적이 어렵기 때문!
+- 뷰의 반응성을 거스르지 않게 명시적으로 상태 변화를 수행하기 위함
 
 
 #### Questions!

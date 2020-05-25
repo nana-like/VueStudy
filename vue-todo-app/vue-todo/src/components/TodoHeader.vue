@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>
-      TODO App
+      TODO
       <i class="fas fa-crow"></i>
     </h1>
   </header>
