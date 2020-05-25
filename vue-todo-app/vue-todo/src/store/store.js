@@ -1,61 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import todoApp from "./modules/todoApp";
 
 Vue.use(Vuex);
 
-const storage = {
-  fetch() {
-    const arr = [];
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          if (localStorage.key(i) !== "csCursors") {
-            arr.push(
-              JSON.parse(localStorage.getItem(localStorage.key(i)))
-            );
-          }
-        }
-      }
-    }
-    return arr;
-  },
-};
-
 export const store = new Vuex.Store({
-  state: {
-    todoItems: storage.fetch()
-  },
-  getters: {
-    storedTodoItems(state) {
-      return state.todoItems;
-    }
-  },
-  mutations: {
-    addOneItem(state, todoItem) {
-      console.log(this);
-      const obj = {
-        completed: false,
-        item: todoItem
-      };
-      localStorage.setItem(todoItem, JSON.stringify(obj));
-      state.todoItems.push(obj);
-    },
-    toggleOneItem(state, payload) {
-      console.log("mutations - 토글 원 아이템");
-      const todoItems = state.todoItems[payload.index];
-      todoItems.completed = !todoItems.completed;
-      localStorage.setItem(todoItems.item, JSON.stringify(todoItems));
-    },
-    removeOneItem(state, payload) {
-      console.log("mutations - 리무브 원 아이템");
-      localStorage.removeItem(payload.todoItem.item);
-      state.todoItems.splice(payload.index, 1);
-    },
-    clearAllItems(state) {
-      if (state.todoItems.length >= 1) {
-        localStorage.clear();
-        state.todoItems = [];
-      }
-    }
+  modules: {
+    todoApp
   }
 })
